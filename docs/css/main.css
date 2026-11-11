@@ -22601,35 +22601,82 @@ has-background-danger.is-hoverable:active {
 }
 
 :root {
-  --bulma-primary-h: 151deg;
-  --bulma-primary-s: 65%;
-  --bulma-primary-l: 42%;
+  --bulma-primary-h: 213deg;
+  --bulma-primary-s: 74%;
+  --bulma-primary-l: 47%;
 }
 
 .button.is-primary {
-  background-color: #2bac73;
-  border-color: #2bac73;
+  background-color: #1f6fd1;
+  border-color: #1f6fd1;
   color: white;
   transition: all 0.2s ease;
 }
 
 .button.is-primary:hover {
-  background-color: rgb(14.3333333333%, 57.3333333333%, 38.3333333333%);
-  border-color: rgb(14.3333333333%, 57.3333333333%, 38.3333333333%);
+  background-color: rgb(10.3333333333%, 37%, 69.6666666667%);
+  border-color: rgb(10.3333333333%, 37%, 69.6666666667%);
   color: white;
 }
 
 .button.is-secondary {
-  background-color: #ff914d;
-  border-color: #ff914d;
+  background-color: #ff8a3d;
+  border-color: #ff8a3d;
   color: white;
   transition: all 0.2s ease;
 }
 
 .button.is-secondary:hover {
-  background-color: rgb(100%, 44.7940074906%, 10.6666666667%);
-  border-color: rgb(100%, 44.7940074906%, 10.6666666667%);
+  background-color: rgb(100%, 42.9072164948%, 5.3333333333%);
+  border-color: rgb(100%, 42.9072164948%, 5.3333333333%);
   color: white;
+}
+
+.navbar-brand a p {
+  color: #1f6fd1;
+  font-size: 1rem;
+}
+.navbar-brand a span {
+  color: #ff8a3d;
+}
+
+.navbar-end a {
+  color: #ff8a3d;
+}
+
+.app-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* бусад элементийн дээр харагдана */
+  background-color: #f5f5f5;
+}
+
+.app-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-brand .image img {
+  max-width: 48px;
+  height: auto;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* дүрс, текстийн хооронд зай */
+}
+
+.app-top-navbar-right {
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.navbar-brand .app-logo:hover,
+.navbar-brand .app-logo:focus,
+.navbar-brand .app-logo:active {
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=main.css.map */
