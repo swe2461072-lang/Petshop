@@ -1,3 +1,4 @@
+import { t } from "../i18n/i18n.js";
 import { renderPageLayout } from "../layouts/pageLayout.js";
 
 export function renderHomePage() {
@@ -5,9 +6,9 @@ export function renderHomePage() {
 
   app.innerHTML = renderPageLayout({
     id: "home",
-    title: "Home",
+    title: t("home.title"),
     content: `
-            <p>Welcome to the Home page.</p>
-            `,
+      <p>${t("home.welcome")}</p>
+    `,
   });
 }
