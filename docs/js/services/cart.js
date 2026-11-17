@@ -2,9 +2,10 @@ import { products, getFinalPrice } from "../data/products.js";
 import { convertPrice } from "./currency.js";
 
 const STORAGE_KEY = "pawworld-cart";
-export const FREE_DELIVERY_USD = 30;
+export const FREE_DELIVERY_USD = 30; // энэ дүнгээс дээш бол хүргэлт үнэгүй
 export const DELIVERY_FEE_USD = 3;
 
+// { бараагийн id: тоо ширхэг }
 let items = load();
 
 function load() {
@@ -18,7 +19,9 @@ function load() {
 function save() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  } catch {}
+  } catch {
+    // хадгалах боломжгүй бол санах ойд л үлдэнэ
+  }
   updateCartBadge();
 }
 
@@ -59,6 +62,7 @@ export function updateCartBadge() {
   });
 }
 
+// Сагсан дахь мөр бүр: бараа, тоо, нэгж үнэ, мөрийн дүн (бүгд тухайн хэлний мөнгөн нэгжээр)
 export function getCartLines() {
   return Object.entries(items)
     .map(([id, qty]) => {
@@ -73,6 +77,7 @@ export function getCartLines() {
     .filter(Boolean);
 }
 
+// Тооцоолол: барааны дүн, хэмнэсэн дүн, хүргэлт, нийт дүн
 export function getTotals() {
   const lines = getCartLines();
   const subtotal = lines.reduce((sum, line) => sum + line.total, 0);
