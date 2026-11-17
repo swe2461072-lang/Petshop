@@ -11,6 +11,8 @@ export function initRouter(routes) {
         notFound();
       }
     }
+
+    window.scrollTo(0, 0);
   }
 
   window.addEventListener("load", renderRoute);

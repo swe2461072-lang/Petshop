@@ -1,13 +1,5 @@
-import { renderPageLayout } from "../layouts/pageLayout.js";
+import { renderCategoryPage } from "./categoryPage.js";
 
 export function renderReptilesPage() {
-  const app = document.getElementById("app");
-
-  app.innerHTML = renderPageLayout({
-    id: "reptiles",
-    title: "Reptiles",
-    content: `
-      <p>Welcome to the Reptiles page.</p>
-    `,
-  });
+  renderCategoryPage("reptiles");
 }

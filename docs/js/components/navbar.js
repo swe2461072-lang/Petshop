@@ -1,122 +1,100 @@
 import { t, toggleLanguage } from "../i18n/i18n.js";
+import { getCartCount } from "../services/cart.js";
+import { getQuery, setQuery } from "../services/search.js";
+
+const LINKS = [
+  { href: "#/dogs", icon: "fa-dog", color: "blue", key: "dogs" },
+  { href: "#/cats", icon: "fa-cat", color: "pink", key: "cats" },
+  { href: "#/reptiles", icon: "fa-dragon", color: "mint", key: "reptiles" },
+  { href: "#/brands", icon: "fa-award", color: "lilac", key: "brands" },
+  { href: "#/deals", icon: "fa-percent", color: "coral", key: "deals" },
+  { href: "#/contact", icon: "fa-address-card", color: "butter", key: "contact" },
+];
 
 export function renderNavbar() {
+  const cartCount = getCartCount();
+
   return `
-        <header class="app-sticky app-shadow">
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item has-text-weight-bold is-uppercase app-logo" href="#/home">
-                <figure class="image"><img src="./img/icon/icon.jpg" alt="logo" /></figure>
-                <p><span class="is-hidden-mobile">${t("nav.brandSpan")}</span> ${t("nav.brand")}</p>
-                </a>
-                <a class="navbar-burger" role="button" aria-expanded="false" data-target="topNavbar">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div class="navbar-menu has-text-weight-semibold has-text-centered" id="topNavbar">
-                <div class="navbar-start app-top-navbar-right">
-                <a class="navbar-item" href="#/home">
-                    <span class="icon has-text-warning">
-                    <i class="fas fa-house"></i>
-                    </span>
-                    <span>${t("nav.home")}</span>
-                </a>
-                <a class="navbar-item" href="#/dogs">
-                    <span class="icon has-text-primary">
-                    <i class="fas fa-dog"></i>
-                    </span>
-                    <span>${t("nav.dogs")}</span>
-                </a>
-                <a class="navbar-item" href="#/cats">
-                    <span class="icon has-text-link">
-                    <i class="fas fa-cat"></i>
-                    </span>
-                    <span>${t("nav.cats")}</span>
-                </a>
-                <a class="navbar-item" href="#/reptiles">
-                    <span class="icon has-text-info">
-                    <i class="fas fa-dragon"></i>
-                    </span>
-                    <span>${t("nav.reptiles")}</span>
-                </a>
-                <a class="navbar-item" href="#/contact">
-                    <span class="icon has-text-danger">
-                    <i class="fas fa-address-card"></i>
-                    </span>
-                    <span>${t("nav.contact")}</span>
-                </a>
-                </div>
-
-                <div class="navbar-end">
-                <a class="navbar-item" href="#" id="langToggle">${t("nav.language")}</a>
-                </div>
-            </div>
-            </div>
-        </nav>
-        </header>
-    `;
+    <div class="app-promo"><i class="fas fa-truck-fast"></i> ${t("promo")}</div>
+ 
+    <header class="app-header">
+      <div class="container app-header-inner">
+        <a class="app-brand" href="#/home">
+          <span class="app-brand-mark"><i class="fas fa-paw"></i></span>
+          <span class="app-brand-text"><b>Paw</b> World</span>
+        </a>
+ 
+        <form class="app-search" id="searchForm" role="search">
+          <input
+            id="searchInput"
+            class="app-search-input"
+            type="search"
+            placeholder="${t("search.placeholder")}"
+            aria-label="${t("search.button")}"
+            value="${getQuery()}"
+          />
+          <button class="app-search-btn" type="submit" aria-label="${t("search.button")}">
+            <i class="fas fa-magnifying-glass"></i>
+          </button>
+        </form>
+ 
+        <div class="app-actions">
+          <a class="app-pill-btn" href="#" id="langToggle">
+            <i class="fas fa-globe"></i> ${t("nav.language")}
+          </a>
+          <span class="app-pill-btn app-cart" aria-label="${t("nav.cart")}">
+            <i class="fas fa-basket-shopping"></i>
+            <span class="app-cart-count ${cartCount === 0 ? "is-hidden" : ""}">${cartCount}</span>
+          </span>
+        </div>
+      </div>
+ 
+      <nav class="app-catnav" aria-label="main navigation">
+        <div class="container app-catnav-inner">
+          ${LINKS.map(
+            (link) => `
+              <a class="app-catlink" href="${link.href}">
+                <span class="app-catlink-icon is-${link.color}"><i class="fas ${link.icon}"></i></span>
+                <span>${t(`nav.${link.key}`)}</span>
+              </a>
+            `,
+          ).join("")}
+        </div>
+      </nav>
+    </header>
+  `;
 }
 
 export function initNavbar() {
-  const burger = document.querySelector(".navbar-burger");
   const languageToggle = document.getElementById("langToggle");
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
+  const links = document.querySelectorAll(".app-catlink");
 
-  if (!burger) return;
-
-  const targetId = burger.dataset.target;
-  const menu = document.getElementById(targetId);
-  const navLinks = menu?.querySelectorAll(".navbar-item[href^='#/']");
-
-  function openMenu() {
-    burger.classList.add("is-active");
-    menu?.classList.add("is-active");
-    burger.setAttribute("aria-expanded", "true");
-  }
-
-  function closeMenu() {
-    burger.classList.remove("is-active");
-    menu?.classList.remove("is-active");
-    burger.setAttribute("aria-expanded", "false");
-  }
-
-  function toggleMenu() {
-    const isOpen = burger.classList.contains("is-active");
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }
-
-  burger.addEventListener("click", toggleMenu);
-
-  // Гар утсан дээр цэсийн холбоос дармагц цэс хаагдана
-  navLinks?.forEach((link) => {
-    link.addEventListener("click", () => {
-      if (window.innerWidth <= 1023) {
-        closeMenu();
-      }
+  function markActive() {
+    const hash = window.location.hash || "#/home";
+    links.forEach((link) => {
+      link.classList.toggle("is-active", link.getAttribute("href") === hash);
     });
+  }
+
+  markActive();
+  window.addEventListener("hashchange", markActive);
+
+  languageToggle?.addEventListener("click", (event) => {
+    event.preventDefault();
+    toggleLanguage();
+    window.location.reload();
   });
 
-  // MN / EN товч дарахад хэл солиод хуудсыг дахин ачаална
-  if (languageToggle) {
-    languageToggle.addEventListener("click", (event) => {
-      event.preventDefault();
-      closeMenu();
-      toggleLanguage();
-      window.location.reload();
-    });
-  }
+  searchForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    setQuery(searchInput.value);
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 1023) {
-      closeMenu();
+    if (window.location.hash === "#/search") {
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    } else {
+      window.location.hash = "#/search";
     }
   });
 }

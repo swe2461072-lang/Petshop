@@ -2,6 +2,9 @@ import { renderHomePage } from "./pages/homePage.js";
 import { renderDogsPage } from "./pages/dogsPage.js";
 import { renderCatsPage } from "./pages/catsPage.js";
 import { renderReptilesPage } from "./pages/reptilesPage.js";
+import { renderBrandsPage } from "./pages/brandsPage.js";
+import { renderDealsPage } from "./pages/dealsPage.js";
+import { renderSearchPage } from "./pages/searchPage.js";
 import { renderContactPage } from "./pages/contactPage.js";
 import { renderNotFoundPage } from "./pages/notFoundPage.js";
 
@@ -10,6 +13,9 @@ export const routes = {
   "#/dogs": renderDogsPage,
   "#/cats": renderCatsPage,
   "#/reptiles": renderReptilesPage,
+  "#/brands": renderBrandsPage,
+  "#/deals": renderDealsPage,
+  "#/search": renderSearchPage,
   "#/contact": renderContactPage,
   "#/404": renderNotFoundPage,
 };
