@@ -1,6 +1,5 @@
 import { t } from "../i18n/i18n.js";
-import { getQuery } from "../services/search.js";
-import { searchProducts } from "../services/search.js";
+import { getQuery, searchProducts } from "../services/search.js";
 import { renderBanner } from "../components/banner.js";
 import { renderProductCard } from "../components/productCard.js";
 
@@ -16,7 +15,7 @@ export function renderSearchPage() {
       title: t("searchPage.title"),
       text: query ? `“${query}”` : t("searchPage.all"),
     })}
- 
+
     <section class="app-section">
       <div class="container">
         ${

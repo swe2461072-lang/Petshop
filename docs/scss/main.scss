@@ -199,6 +199,10 @@ h3,
   background: map-get($tints, "pink");
 }
 
+.app-cart-text {
+  font-size: 0.9rem;
+}
+
 .app-cart-count {
   min-width: 1.35rem;
   height: 1.35rem;
@@ -508,13 +512,34 @@ h3,
 }
 
 .app-product-art {
-  height: 7.5rem;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
   border-radius: 18px;
   background: var(--tint);
   color: var(--accent);
   display: grid;
   place-items: center;
   font-size: 3.2rem;
+}
+
+.app-product-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-product-desc {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: $ink-soft;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .app-product-tag {
@@ -799,6 +824,211 @@ h3,
   color: $ink-soft;
 }
 
+// ---------- сагс ----------
+.app-cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 22rem;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.app-cartlines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.app-cartline {
+  display: grid;
+  grid-template-columns: 6rem 1fr auto 6.5rem auto;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border: 3px solid $line;
+  border-radius: 20px;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  box-shadow: $shadow;
+
+  h3 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  p {
+    font-size: 0.85rem;
+    color: $ink-soft;
+  }
+}
+
+.app-cartline-art {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  background: var(--tint);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.app-cartline-unit {
+  color: $coral !important;
+  font-weight: 800;
+}
+
+.app-cartline-total {
+  text-align: right;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.app-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: $cream;
+  border-radius: 999px;
+  padding: 0.2rem;
+
+  span {
+    min-width: 1.6rem;
+    text-align: center;
+    font-weight: 800;
+  }
+
+  button {
+    width: 1.9rem;
+    height: 1.9rem;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: $ink;
+    cursor: pointer;
+    box-shadow: 0 2px 0 $line;
+    transition: transform 0.15s;
+
+    &:hover {
+      transform: scale(1.12);
+      color: $coral;
+    }
+  }
+}
+
+.app-remove {
+  border: 0;
+  background: transparent;
+  color: $ink-soft;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.4rem;
+
+  &:hover {
+    color: $coral;
+  }
+}
+
+.app-summary {
+  position: sticky;
+  top: 9rem;
+  background: #fff;
+  border: 3px solid $line;
+  border-radius: $radius;
+  padding: 1.3rem;
+  box-shadow: $shadow;
+
+  h2 {
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+}
+
+.app-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0;
+
+  &.is-saved {
+    color: #1fa97a;
+  }
+
+  &.is-total {
+    margin-top: 0.7rem;
+    padding-top: 0.8rem;
+    border-top: 3px dashed $line;
+    font-family: "Fredoka", "Nunito", sans-serif;
+    font-size: 1.3rem;
+
+    b {
+      color: $coral;
+    }
+  }
+}
+
+.app-progress {
+  height: 0.7rem;
+  margin-top: 0.6rem;
+  background: $cream;
+  border-radius: 999px;
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: $mint;
+    border-radius: 999px;
+    transition: width 0.3s;
+  }
+}
+
+.app-progress-note {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: $ink-soft;
+
+  i {
+    color: $mint;
+  }
+}
+
+.app-checkout {
+  width: 100%;
+  border: 0;
+  margin-top: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.app-clear {
+  display: block;
+  margin: 0.8rem auto 0;
+  border: 0;
+  background: transparent;
+  color: $ink-soft;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    color: $coral;
+  }
+}
+
 .app-empty {
   text-align: center;
   color: $ink-soft;
@@ -911,6 +1141,14 @@ h3,
     grid-template-columns: repeat(3, 1fr);
   }
 
+  .app-cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .app-summary {
+    position: static;
+  }
+
   .app-hero-inner {
     grid-template-columns: 1fr;
     padding-top: 2.2rem;
@@ -1011,6 +1249,41 @@ h3,
   }
 }
 
+@media (max-width: 600px) {
+  .app-cartline {
+    grid-template-columns: 5rem 1fr auto;
+    grid-template-areas:
+      "art info remove"
+      "art qty total";
+    row-gap: 0.4rem;
+  }
+
+  .app-cartline-art {
+    grid-area: art;
+  }
+
+  .app-cartline-info {
+    grid-area: info;
+  }
+
+  .app-qty {
+    grid-area: qty;
+    justify-self: start;
+  }
+
+  .app-cartline-total {
+    grid-area: total;
+  }
+
+  .app-remove {
+    grid-area: remove;
+  }
+
+  .app-cart-text {
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
   .app-grid {
     gap: 0.8rem;
@@ -1021,7 +1294,6 @@ h3,
   }
 
   .app-product-art {
-    height: 5.5rem;
     font-size: 2.4rem;
   }
 

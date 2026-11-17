@@ -42,10 +42,11 @@ export function renderNavbar() {
           <a class="app-pill-btn" href="#" id="langToggle">
             <i class="fas fa-globe"></i> ${t("nav.language")}
           </a>
-          <span class="app-pill-btn app-cart" aria-label="${t("nav.cart")}">
+          <a class="app-pill-btn app-cart" href="#/cart" aria-label="${t("nav.cart")}">
             <i class="fas fa-basket-shopping"></i>
+            <span class="app-cart-text">${t("nav.cart")}</span>
             <span class="app-cart-count ${cartCount === 0 ? "is-hidden" : ""}">${cartCount}</span>
-          </span>
+          </a>
         </div>
       </div>
  

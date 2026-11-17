@@ -22643,6 +22643,16 @@ h3,
   --accent: #ffd86b;
 }
 
+.is-coral {
+  --tint: #ffe3dd;
+  --accent: #ff7a6b;
+}
+
+.is-lilac {
+  --tint: #ece6ff;
+  --accent: #b9a6ff;
+}
+
 .app-promo {
   background: #3a3150;
   color: #fff;
@@ -22770,6 +22780,10 @@ h3,
 
 .app-cart {
   background: #ffe6f0;
+}
+
+.app-cart-text {
+  font-size: 0.9rem;
 }
 
 .app-cart-count {
@@ -23044,6 +23058,7 @@ h3,
 }
 
 .app-product {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -23059,13 +23074,34 @@ h3,
 }
 
 .app-product-art {
-  height: 7.5rem;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
   border-radius: 18px;
   background: var(--tint);
   color: var(--accent);
   display: grid;
   place-items: center;
   font-size: 3.2rem;
+}
+
+.app-product-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-product-desc {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #7a7090;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .app-product-tag {
@@ -23082,6 +23118,40 @@ h3,
   font-weight: 600;
   line-height: 1.3;
   min-height: 2.7rem;
+}
+
+.app-product-brand {
+  font-size: 0.8rem;
+  color: #7a7090;
+  margin-top: 0.1rem;
+}
+
+.app-badge {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.4rem;
+  z-index: 1;
+  background: #ff7a6b;
+  color: #fff;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 rgb(100%, 24.8800211977%, 16.4078431373%);
+  transform: rotate(-6deg);
+}
+
+.app-prices {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.app-price-old {
+  font-size: 0.8rem;
+  color: #7a7090;
+  text-decoration: line-through;
 }
 
 .app-product-foot {
@@ -23187,6 +23257,314 @@ h3,
   color: #fff;
 }
 
+.app-filter-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.9rem;
+}
+.app-filter-row .app-filters {
+  margin-bottom: 0;
+}
+
+.app-filter-label {
+  flex: none;
+  min-width: 6.5rem;
+  font-weight: 800;
+  color: #7a7090;
+  font-size: 0.9rem;
+}
+
+.app-count {
+  margin: 0.5rem 0 1rem;
+  color: #7a7090;
+  font-weight: 700;
+}
+
+.app-heading-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.app-heading-row .app-heading {
+  margin-bottom: 0;
+}
+
+.app-link {
+  font-weight: 800;
+  color: #ff7a6b;
+  white-space: nowrap;
+}
+.app-link:hover {
+  color: rgb(100%, 28.7072072072%, 20.6666666667%);
+}
+.app-link i {
+  margin-left: 0.25rem;
+}
+
+.app-brandchips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.app-brandchip {
+  background: #fff;
+  border: 3px solid #f0e4d2;
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem;
+  font-weight: 800;
+  color: #3a3150;
+  transition: all 0.15s;
+}
+.app-brandchip:hover {
+  border-color: #b9a6ff;
+  background: #ece6ff;
+  color: #3a3150;
+  transform: translateY(-2px);
+}
+
+.app-brandcards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+}
+
+.app-brandcard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  text-align: left;
+  font: inherit;
+  color: #3a3150;
+  background: #fff;
+  border: 3px solid #f0e4d2;
+  border-radius: 20px;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(58, 49, 80, 0.07);
+  transition: all 0.15s;
+}
+.app-brandcard:hover {
+  border-color: #b9a6ff;
+  transform: translateY(-3px);
+}
+.app-brandcard.is-active {
+  background: #ece6ff;
+  border-color: #b9a6ff;
+}
+
+.app-brandcard-name {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.app-brandcard-pets {
+  display: flex;
+  gap: 0.45rem;
+  color: #b9a6ff;
+}
+
+.app-brandcard-count {
+  font-size: 0.8rem;
+  color: #7a7090;
+}
+
+.app-cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 22rem;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.app-cartlines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.app-cartline {
+  display: grid;
+  grid-template-columns: 6rem 1fr auto 6.5rem auto;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border: 3px solid #f0e4d2;
+  border-radius: 20px;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  box-shadow: 0 6px 0 rgba(58, 49, 80, 0.07);
+}
+.app-cartline h3 {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.app-cartline p {
+  font-size: 0.85rem;
+  color: #7a7090;
+}
+
+.app-cartline-art {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  border-radius: 14px;
+  background: var(--tint);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+}
+.app-cartline-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.app-cartline-unit {
+  color: #ff7a6b !important;
+  font-weight: 800;
+}
+
+.app-cartline-total {
+  text-align: right;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.app-qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fff8ee;
+  border-radius: 999px;
+  padding: 0.2rem;
+}
+.app-qty span {
+  min-width: 1.6rem;
+  text-align: center;
+  font-weight: 800;
+}
+.app-qty button {
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #3a3150;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #f0e4d2;
+  transition: transform 0.15s;
+}
+.app-qty button:hover {
+  transform: scale(1.12);
+  color: #ff7a6b;
+}
+
+.app-remove {
+  border: 0;
+  background: transparent;
+  color: #7a7090;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.4rem;
+}
+.app-remove:hover {
+  color: #ff7a6b;
+}
+
+.app-summary {
+  position: sticky;
+  top: 9rem;
+  background: #fff;
+  border: 3px solid #f0e4d2;
+  border-radius: 24px;
+  padding: 1.3rem;
+  box-shadow: 0 6px 0 rgba(58, 49, 80, 0.07);
+}
+.app-summary h2 {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.app-summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0;
+}
+.app-summary-row.is-saved {
+  color: #1fa97a;
+}
+.app-summary-row.is-total {
+  margin-top: 0.7rem;
+  padding-top: 0.8rem;
+  border-top: 3px dashed #f0e4d2;
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-size: 1.3rem;
+}
+.app-summary-row.is-total b {
+  color: #ff7a6b;
+}
+
+.app-progress {
+  height: 0.7rem;
+  margin-top: 0.6rem;
+  background: #fff8ee;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.app-progress span {
+  display: block;
+  height: 100%;
+  background: #6fddb7;
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+
+.app-progress-note {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #7a7090;
+}
+.app-progress-note i {
+  color: #6fddb7;
+}
+
+.app-checkout {
+  width: 100%;
+  border: 0;
+  margin-top: 1rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.app-clear {
+  display: block;
+  margin: 0.8rem auto 0;
+  border: 0;
+  background: transparent;
+  color: #7a7090;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.app-clear:hover {
+  color: #ff7a6b;
+}
+
 .app-empty {
   text-align: center;
   color: #7a7090;
@@ -23287,6 +23665,15 @@ h3,
   .app-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .app-brandcards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .app-cart-layout {
+    grid-template-columns: 1fr;
+  }
+  .app-summary {
+    position: static;
+  }
   .app-hero-inner {
     grid-template-columns: 1fr;
     padding-top: 2.2rem;
@@ -23313,6 +23700,13 @@ h3,
   }
 }
 @media (max-width: 768px) {
+  .app-brandcards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .app-filter-row {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
   .app-header-inner {
     flex-wrap: wrap;
     gap: 0.7rem;
@@ -23363,6 +23757,32 @@ h3,
     flex-direction: column;
   }
 }
+@media (max-width: 600px) {
+  .app-cartline {
+    grid-template-columns: 5rem 1fr auto;
+    grid-template-areas: "art info remove" "art qty total";
+    row-gap: 0.4rem;
+  }
+  .app-cartline-art {
+    grid-area: art;
+  }
+  .app-cartline-info {
+    grid-area: info;
+  }
+  .app-qty {
+    grid-area: qty;
+    justify-self: start;
+  }
+  .app-cartline-total {
+    grid-area: total;
+  }
+  .app-remove {
+    grid-area: remove;
+  }
+  .app-cart-text {
+    display: none;
+  }
+}
 @media (max-width: 480px) {
   .app-grid {
     gap: 0.8rem;
@@ -23371,7 +23791,6 @@ h3,
     padding: 0.7rem;
   }
   .app-product-art {
-    height: 5.5rem;
     font-size: 2.4rem;
   }
   .app-banner-icon {

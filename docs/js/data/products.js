@@ -137,3 +137,302 @@ export function getProductName(product, language) {
 export function getFinalPrice(product) {
   return product.sale ? product.usd * (1 - product.sale / 100) : product.usd;
 }
+
+const typeInfo = {
+  dryFood: {
+    icon: "fa-bowl-food",
+    desc: {
+      en: "Crunchy complete meals that keep your dog full of energy.",
+      mn: "Нохойг эрч хүчтэй байлгах бүрэн дүүрэн хуурай хоол.",
+      ko: "강아지를 활기차게 해주는 영양 만점 바삭한 사료.",
+    },
+  },
+  wetFood: {
+    icon: "fa-jar",
+    desc: {
+      en: "Soft, juicy meals dogs love, great for picky eaters.",
+      mn: "Нохойн дуртай зөөлөн, шүүслэг хоол, сонгомол нохойд тохиромжтой.",
+      ko: "입맛 까다로운 강아지도 좋아하는 부드럽고 촉촉한 습식 사료.",
+    },
+  },
+  trainTreat: {
+    icon: "fa-cookie-bite",
+    desc: {
+      en: "Tiny tasty bites for rewarding good behavior.",
+      mn: "Сайн үйлийг шагнах жижиг амттай амттан.",
+      ko: "잘했을 때 칭찬해 주기 좋은 작고 맛있는 간식.",
+    },
+  },
+  dentalChew: {
+    icon: "fa-tooth",
+    desc: {
+      en: "A chewy treat that helps keep teeth clean and breath fresh.",
+      mn: "Шүдийг цэвэр, амьсгалыг сэргэг байлгахад тусалдаг зажлуур.",
+      ko: "치아를 깨끗하게, 입 냄새를 상쾌하게 도와주는 껌.",
+    },
+  },
+  ropeToy: {
+    icon: "fa-bone",
+    desc: {
+      en: "Tough braided rope for tug games and chewing.",
+      mn: "Татаж тоглох, зажлахад зориулсан бат бөх сүлжмэл олс.",
+      ko: "줄다리기와 씹기에 좋은 튼튼한 땋은 로프.",
+    },
+  },
+  squeakBall: {
+    icon: "fa-baseball",
+    desc: {
+      en: "A bouncy ball with a squeak that makes fetch more fun.",
+      mn: "Дуугардаг үсрэмтгий бөмбөг, шүүрч тоглоход илүү хөгжилтэй.",
+      ko: "삑삑 소리로 공 놀이를 더 재미있게 해주는 탱탱볼.",
+    },
+  },
+  plushToy: {
+    icon: "fa-heart",
+    desc: {
+      en: "Soft cuddly toy for gentle play and naps.",
+      mn: "Зөөлөн тоглож, унтахад тохиромжтой гэгээн тоглоом.",
+      ko: "부드럽게 놀고 낮잠 잘 때 좋은 포근한 인형.",
+    },
+  },
+  cushionBed: {
+    icon: "fa-bed",
+    desc: {
+      en: "A cushy bed with raised edges for deep, cozy sleep.",
+      mn: "Захтай зөөлөн ор, тайван унтахад тохиромжтой.",
+      ko: "가장자리가 높아 푹 잘 수 있는 푹신한 침대.",
+    },
+  },
+  cozyBlanket: {
+    icon: "fa-couch",
+    desc: {
+      en: "A warm fleece blanket for chilly days.",
+      mn: "Хүйтэн өдөрт зориулсан дулаахан хөнжил.",
+      ko: "쌀쌀한 날에 좋은 따뜻한 플리스 담요.",
+    },
+  },
+  collar: {
+    icon: "fa-ring",
+    desc: {
+      en: "An adjustable collar with a sturdy buckle.",
+      mn: "Тохируулдаг, бат бөх тэврэлттэй хүзүүвч.",
+      ko: "길이 조절이 되는 튼튼한 버클 목걸이.",
+    },
+  },
+  leash: {
+    icon: "fa-link",
+    desc: {
+      en: "A strong, comfy leash for daily walks.",
+      mn: "Өдөр тутмын алхалтад зориулсан бат бөх, эвтэйхэн оосор.",
+      ko: "매일 산책에 좋은 튼튼하고 편한 리드줄.",
+    },
+  },
+  harness: {
+    icon: "fa-vest",
+    desc: {
+      en: "A padded harness that spreads pressure and reduces pulling.",
+      mn: "Даралтыг жигд тараадаг, зөөлөн бүс оосор.",
+      ko: "압력을 분산시켜 주는 푹신한 하네스.",
+    },
+  },
+
+  catDry: {
+    icon: "fa-bowl-food",
+    desc: {
+      en: "Crunchy kibble with the protein cats need every day.",
+      mn: "Муурт өдөр бүр хэрэгтэй уураг агуулсан хуурай хоол.",
+      ko: "매일 필요한 단백질을 담은 바삭한 고양이 사료.",
+    },
+  },
+  catWet: {
+    icon: "fa-jar",
+    desc: {
+      en: "Tender pieces in gravy, full of flavor and moisture.",
+      mn: "Амт, чийг ихтэй зөөлөн хэсгүүд бүхий нойтон хоол.",
+      ko: "풍미와 수분이 가득한 부드러운 습식 사료.",
+    },
+  },
+  catTreat: {
+    icon: "fa-fish",
+    desc: {
+      en: "Soft, tasty treats cats can't resist.",
+      mn: "Муурын дургүй өнгөрөхгүй зөөлөн амттан.",
+      ko: "고양이가 거부할 수 없는 부드럽고 맛있는 간식.",
+    },
+  },
+  clumpLitter: {
+    icon: "fa-box-open",
+    desc: {
+      en: "Forms tight clumps for easy scooping and less odor.",
+      mn: "Бөөгнөрч, цэвэрлэхэд хялбар, үнэр багатай.",
+      ko: "단단히 뭉쳐 치우기 쉽고 냄새가 적어요.",
+    },
+  },
+  crystalLitter: {
+    icon: "fa-gem",
+    desc: {
+      en: "Long-lasting crystals that absorb moisture and lock in smells.",
+      mn: "Чийг шингээж, үнэрийг барьдаг урт удаан эдэлгээтэй талст.",
+      ko: "수분을 흡수하고 냄새를 잡아주는 오래가는 크리스탈.",
+    },
+  },
+  featherWand: {
+    icon: "fa-feather",
+    desc: {
+      en: "A wand with feathers that wakes up your cat's inner hunter.",
+      mn: "Муурын агнах авьяасыг сэрээх өдтэй саваа.",
+      ko: "고양이의 사냥 본능을 깨우는 깃털 낚싯대.",
+    },
+  },
+  mouseToy: {
+    icon: "fa-cheese",
+    desc: {
+      en: "A little mouse for batting, chasing and pouncing.",
+      mn: "Тоглож, хөөж, мөлхөх жижиг хулганан тоглоом.",
+      ko: "굴리고 쫓고 덮치며 노는 작은 쥐 장난감.",
+    },
+  },
+  scratchPost: {
+    icon: "fa-tree",
+    desc: {
+      en: "A tall sisal post that saves your furniture.",
+      mn: "Тавилгыг хамгаалдаг өндөр сизал багана.",
+      ko: "가구를 지켜주는 높은 사이잘 스크래처.",
+    },
+  },
+  catCave: {
+    icon: "fa-igloo",
+    desc: {
+      en: "A snug hideaway for naps and quiet time.",
+      mn: "Нойрмоглож, тайван байхад зориулсан дулаахан нуух газар.",
+      ko: "낮잠과 휴식을 위한 아늑한 은신처.",
+    },
+  },
+  catCollar: {
+    icon: "fa-bell",
+    desc: {
+      en: "A light collar with a safety clasp and a bell.",
+      mn: "Аюулгүй тэврэлттэй, хонхтой хөнгөн хүзүүвч.",
+      ko: "안전 버클과 방울이 달린 가벼운 목걸이.",
+    },
+  },
+
+  terrarium: {
+    icon: "fa-leaf",
+    desc: {
+      en: "Everything to start: tank, lid, substrate and lighting.",
+      mn: "Сав, таг, шороо, гэрэл зэрэг эхлэхэд хэрэгтэй бүх зүйл.",
+      ko: "사육장, 뚜껑, 바닥재, 조명까지 시작에 필요한 모든 것.",
+    },
+  },
+  tank: {
+    icon: "fa-cube",
+    desc: {
+      en: "A clear glass tank with a secure, ventilated lid.",
+      mn: "Агааржуулалттай найдвартай тагтай тунгалаг шилэн сав.",
+      ko: "환기되는 안전한 뚜껑이 있는 투명 유리 사육장.",
+    },
+  },
+  dryCricket: {
+    icon: "fa-bug",
+    desc: {
+      en: "Protein-rich crunchy snack for lizards and more.",
+      mn: "Гүрвэл зэрэгт зориулсан уураг ихтэй хатуу хоол.",
+      ko: "도마뱀 등을 위한 단백질 가득 바삭한 간식.",
+    },
+  },
+  mealworms: {
+    icon: "fa-worm",
+    desc: {
+      en: "Easy, no-mess protein your reptile will love.",
+      mn: "Хэвлээр явагчийн дуртай, бохирдолгүй уурагт хоол.",
+      ko: "지저분하지 않고 파충류가 좋아하는 단백질 간식.",
+    },
+  },
+  reptilePellets: {
+    icon: "fa-bowl-food",
+    desc: {
+      en: "Balanced daily pellets with vitamins and minerals.",
+      mn: "Витамин, эрдэс бүхий тэнцвэртэй өдөр тутмын үрлэн хоол.",
+      ko: "비타민과 미네랄이 균형 잡힌 매일 펠릿.",
+    },
+  },
+  heatLamp: {
+    icon: "fa-lightbulb",
+    desc: {
+      en: "A warm basking light that keeps the habitat cozy.",
+      mn: "Байрыг дулаан байлгадаг наранд хэвтэх дэнлүү.",
+      ko: "서식지를 따뜻하게 해주는 일광욕 램프.",
+    },
+  },
+  uvbLight: {
+    icon: "fa-sun",
+    desc: {
+      en: "UVB light helps your reptile stay strong and healthy.",
+      mn: "UVB гэрэл нь хэвлээр явагчийг эрүүл, хүчтэй байлгана.",
+      ko: "UVB 조명이 파충류의 건강을 지켜줘요.",
+    },
+  },
+  thermometer: {
+    icon: "fa-temperature-half",
+    desc: {
+      en: "Check the habitat's temperature at a glance.",
+      mn: "Байрны температурыг нэг харахад мэдэх термометр.",
+      ko: "사육장 온도를 한눈에 확인해요.",
+    },
+  },
+  hideCave: {
+    icon: "fa-mountain",
+    desc: {
+      en: "A shady hideout where shy reptiles feel safe.",
+      mn: "Ичимтгий амьтан аюулгүй мэдрэх сүүдэртэй нуугдах газар.",
+      ko: "소심한 파충류가 안심하는 그늘진 은신처.",
+    },
+  },
+  plantDecor: {
+    icon: "fa-seedling",
+    desc: {
+      en: "Soft plastic plants that make the tank look lively.",
+      mn: "Савыг амьд харагдуулдаг зөөлөн хуванцар ургамал.",
+      ko: "사육장을 생기 있게 꾸며주는 부드러운 인조 식물.",
+    },
+  },
+  calcium: {
+    icon: "fa-bottle-droplet",
+    desc: {
+      en: "Calcium powder for strong bones and healthy growth.",
+      mn: "Яс бэхжүүлж, эрүүл өсөлтөд тусалдаг кальцийн нунтаг.",
+      ko: "튼튼한 뼈와 건강한 성장을 위한 칼슘.",
+    },
+  },
+  waterDish: {
+    icon: "fa-droplet",
+    desc: {
+      en: "A sturdy dish for fresh drinking and soaking water.",
+      mn: "Цэвэр ус ууж, шимэгдэхэд зориулсан бат бөх аяга.",
+      ko: "신선한 물을 마시고 몸을 담글 수 있는 튼튼한 그릇.",
+    },
+  },
+};
+
+export const variantIcons = {
+  chicken: "fa-drumstick-bite",
+  beef: "fa-cow",
+  salmon: "fa-fish",
+  lamb: "fa-cloud",
+  tuna: "fa-fish",
+  duck: "fa-feather",
+};
+
+export function getProductDescription(product, language) {
+  return typeInfo[product.type].desc[language];
+}
+
+export function getProductIcon(product) {
+  return typeInfo[product.type].icon;
+}
+
+export function getProductImage(product) {
+  const name = getProductName(product, "en");
+  return encodeURI(`./img/${product.pet}/${name}.jpg`);
+}
